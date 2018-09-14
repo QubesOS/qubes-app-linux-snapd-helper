@@ -1,0 +1,13 @@
+[Unit]
+Description=Rebuild the non-persistent snappy systemd mounts
+After=qubes-mount-dirs.service
+ConditionPathExists=/usr/bin/snap
+Before=snapd.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/lib/qubes/qubes-snapd-mount
+
+[Install]
+WantedBy=multi-user.target

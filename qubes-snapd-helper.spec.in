@@ -1,0 +1,40 @@
+Name:		qubes-snapd-helper
+Version:	@VERSION@
+Release:	1%{?dist}
+Summary:	Helper for snapd to make snaps persistent in Qubes VMs
+
+License:	GPL
+URL:		https://www.qubes-os.org
+Source0:	%{name}-%{version}.tar.gz
+BuildArch:  noarch
+%{?systemd_requires}
+BuildRequires: systemd
+
+%description
+Helper scripts to make snaps persistent in Qubes VMs. This consists of two parts:
+ - bind-dirs configuration to persist /var/lib/snapd and /snap
+ - script to regenerate snap-*.mount unit files
+
+%prep
+%setup -q
+
+%install
+%make_install
+
+%post
+%systemd_post qubes-snapd-mount.service
+
+%preun
+%systemd_preun qubes-snapd-mount.service
+
+%postun
+%systemd_postun qubes-snapd-mount.service
+
+%files
+%{_unitdir}/qubes-snapd-mount.service
+%{_unitdir}-preset/70-qubes-snapd.preset
+/usr/lib/qubes/qubes-snapd-mount
+/usr/lib/qubes-bind-dirs.d/30_snapd.conf
+
+%changelog
+@CHANGELOG@
