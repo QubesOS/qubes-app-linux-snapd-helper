@@ -2,24 +2,34 @@
 
 cd /var/lib/snapd/snaps/ || exit 1
 
+if [ -d /snap ]; then
+    target_dir=/snap
+elif [ -d /var/lib/snapd/snap ]; then
+    target_dir=/var/lib/snapd/snap
+else
+    echo "Can't find snap target mount dir" >&2
+    exit 1
+fi
+
 ls *.snap | cut -d'.' -f1 | sed 's/_/ /' | \
 while read app revision; do
-    if [ ! -e /etc/systemd/system/snap-$app-$revision.mount ]; then
-        cat >/etc/systemd/system/snap-$app-$revision.mount <<EOF
+    unit_name=$(systemd-escape -p "${target_dir}/${app}/${revision}")
+    if [ ! -e /etc/systemd/system/$unit_name.mount ]; then
+        cat >/etc/systemd/system/$unit_name.mount <<EOF
 [Unit]
 Description=Mount unit for ${app}, revision ${revision}
 Before=snapd.service
 
 [Mount]
 What=/var/lib/snapd/snaps/${app}_${revision}.snap
-Where=/snap/${app}/${revision}
+Where=${target_dir}/${app}/${revision}
 Type=squashfs
 Options=nodev,ro,x-gdu.hide
 
 [Install]
 WantedBy=multi-user.target
 EOF
-        systemctl -q enable snap-$app-$revision.mount
-        systemctl -q start snap-$app-$revision.mount
+        systemctl -q enable $unit_name.mount
+        systemctl -q start $unit_name.mount
     fi
 done
