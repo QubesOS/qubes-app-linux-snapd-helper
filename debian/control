@@ -1,0 +1,21 @@
+Source: qubes-snapd-helper
+Section: admin
+Priority: optional
+Maintainer: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Build-Depends:
+ debhelper (>= 9),
+ dh-systemd
+Standards-Version: 3.9.8
+Homepage: https://www.qubes-os.org/
+#Vcs-Git: https://anonscm.debian.org/git/collab-maint/qubes-snapd-helper.git
+#Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/qubes-snapd-helper.git
+
+Package: qubes-snapd-helper
+Architecture: any
+Depends: ${misc:Depends}
+Enhances: snapd
+Description: Helper for snapd to make snaps persistent in Qubes VMs
+ Helper scripts to make snaps persistent in Qubes VMs. This consists of two
+ parts:
+  - bind-dirs configuration to persist /var/lib/snapd and /snap
+  - script to regenerate snap-*.mount unit files

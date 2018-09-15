@@ -1,0 +1,5 @@
+qubes-snapd-helper (1.0.0-1) unstable; urgency=medium
+
+  * Initial release
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Sat, 15 Sep 2018 01:00:33 +0200
