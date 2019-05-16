@@ -22,10 +22,11 @@
 
 cd /var/lib/snapd/snaps/ || exit 1
 
-if [ -d /snap ]; then
+if [ -d /snap ] && [ ! -h /snap ]; then
     target_dir=/snap
 elif [ -d /var/lib/snapd/snap ]; then
     target_dir=/var/lib/snapd/snap
+    ln -sf "$target_dir" /
 else
     echo "Can't find snap target mount dir" >&2
     exit 1
