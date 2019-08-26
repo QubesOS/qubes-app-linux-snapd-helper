@@ -1,3 +1,13 @@
+qubes-snapd-helper (1.0.1-1) unstable; urgency=medium
+
+  [ Marek Marczykowski-Górecki ]
+  * travis: drop R3.2, add fc30 and buster
+
+  [ Anastasia Cotorobai ]
+  * Fix Fedora target_dir symlink problem with respect to upstream
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Mon, 26 Aug 2019 23:52:15 +0200
+
 qubes-snapd-helper (1.0.0-1) unstable; urgency=medium
 
   * Initial release
