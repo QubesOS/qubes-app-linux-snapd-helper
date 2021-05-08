@@ -8,6 +8,7 @@ URL:		https://www.qubes-os.org
 Source0:	%{name}-%{version}.tar.gz
 BuildArch:  noarch
 %{?systemd_requires}
+BuildRequires: make
 BuildRequires: systemd
 
 %description
