@@ -1,6 +1,6 @@
 vm:
   rpm:
-    spec:
+    build:
     - qubes-snapd-helper.spec
   deb:
     build:
