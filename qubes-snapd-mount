@@ -50,7 +50,17 @@ Options=nodev,ro,x-gdu.hide
 [Install]
 WantedBy=multi-user.target
 EOF
-        systemctl -q enable $unit_name.mount
-        systemctl -q start $unit_name.mount
+        cat >/etc/systemd/system/$unit_name.automount <<EOF
+[Unit]
+Description=Automount unit for ${app}, revision ${revision}
+
+[Automount]
+Where=${target_dir}/${app}/${revision}
+
+[Install]
+WantedBy=multi-user.target
+EOF
+        systemctl -q enable $unit_name.automount
+        systemctl -q start $unit_name.automount
     fi
 done
