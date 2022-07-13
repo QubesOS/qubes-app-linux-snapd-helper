@@ -1,3 +1,15 @@
+qubes-snapd-helper (1.0.4-1) unstable; urgency=medium
+
+  [ Frédéric Pierret (fepitre) ]
+  * Drop Travis CI
+  * Add Qubes Builder v2 integration
+  * .qubesbuilder: replace 'spec' by 'build'
+
+  [ Maarten Aertsen ]
+  * Create, enable and start .automount files
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Wed, 13 Jul 2022 17:58:21 +0200
+
 qubes-snapd-helper (1.0.3-1) unstable; urgency=medium
 
   [ Frédéric Pierret (fepitre) ]
